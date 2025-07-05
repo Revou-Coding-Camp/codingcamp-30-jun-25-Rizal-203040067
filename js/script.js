@@ -58,3 +58,66 @@ window.addEventListener("scroll", () => {
     }
   });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.querySelector('#contact form');
+  const outputA = document.getElementById('outputA');
+  const outputB = document.getElementById('outputB');
+  const clearButton = document.getElementById('clear');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); 
+    const firstName = document.getElementById('first-name').value;
+    const lastName = document.getElementById('last-name').value;
+    const company = document.getElementById('company').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone-number').value;
+    const country = document.getElementById('country').value;
+    const message = document.getElementById('message').value;
+
+    outputB.innerHTML = `
+      <p><strong>First Name:</strong> ${firstName}</p>
+      <p><strong>Last Name:</strong> ${lastName}</p>
+      <p><strong>Company:</strong> ${company}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${country} ${phone}</p>
+      <p><strong>Message:</strong> ${message}</p>
+    `;
+
+    outputA.style.display = 'block';
+  });
+
+  clearButton.addEventListener('click', function () {
+    outputB.innerHTML = '';
+    outputA.style.display = 'none';
+  });
+});
+
+function getUsername() {
+      const urlParams = new URLSearchParams(window.location.search);
+      let username = urlParams.get('username');
+
+      if (!username) {
+        username = prompt("Masukkan nama:");
+        if (username) {
+          const url = new URL(window.location);
+          url.searchParams.set('username', username);
+          window.history.replaceState({}, '', url);
+        }
+      }
+
+      if (username) {
+        document.getElementById('username').textContent = username;
+      }
+  }
+
+document.addEventListener('DOMContentLoaded', function () {
+      getUsername();
+      
+      const contactForm = document.getElementById('contactForm');
+      if (contactForm) {
+        contactForm.addEventListener('submit', handleFormSubmit);
+      }
+
+      setupSmoothScroll();
+ });
